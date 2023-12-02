@@ -22,6 +22,15 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
+  // модель верифікації 
+  verify: {
+    type: Boolean,
+    default: false,
+  },
+  verificationToken: {
+    type: String,
+    required: [true, "Verify token is required"],
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);

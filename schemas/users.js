@@ -7,9 +7,14 @@ const userSchema = Joi.object({
     .valid("starter", "pro", "business")
     .default("starter")
     .label("Subscription"),
-  token: Joi.string()
-  .label("Token"),
-  avatarURL: Joi.string()
+  token: Joi.string().label("Token"),
+  avatarURL: Joi.string(),
+  verify: Joi.boolean(),
+  verificationToken: Joi.string(),
 });
 
-module.exports = { userSchema };
+const verifySchema = Joi.object({
+  email: Joi.string().email().required().label("Email"),
+});
+
+module.exports = { userSchema, verifySchema };

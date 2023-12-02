@@ -30,6 +30,13 @@ function auth(req, res, next) {
       if (user.token !== token) {
         return res.status(401).send({ message: "Invalid token" });
       }
+      // для тимчасового токена
+      if (user.verify !== true) {
+        return res
+          .status(401)
+          .send({ message: "Your account is not verified" });
+      }
+
       req.user = { id: user._id, name: user.name };
       next();
     } catch (error) {
